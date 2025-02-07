@@ -35,6 +35,8 @@ public class Users {
 
     private String phone;
 
+    private boolean active;
+
     @Embedded
     private Address address;
 
@@ -43,6 +45,7 @@ public class Users {
         this.email = createUserDTO.getEmail();
         this.cpf = createUserDTO.getCpf();
         this.phone = createUserDTO.getPhone();
+        this.active = true;
         this.address = new Address(createUserDTO.getAddress());
     }
 }
