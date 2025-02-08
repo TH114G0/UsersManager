@@ -13,6 +13,8 @@ public class MaskFormatter {
     }
 
     public static String maskPhone(String phone) {
+        phone = phone.replaceAll("[^0-9]", "");
+
         if(phone.length() != 11) {
             throw new IllegalArgumentException("Número do celular deve conter 11 dígitos.");
         }
@@ -22,6 +24,7 @@ public class MaskFormatter {
     }
 
     public static String maskZip_code(String zip_code) {
+        zip_code = zip_code.replaceAll("[^0-9]", "");
         if (zip_code.length() != 8) {
             throw new IllegalArgumentException("CEP deve conter 8 dígitos.");
         }
