@@ -2,6 +2,7 @@ package br.com.manager.domain.model;
 
 
 import br.com.manager.dto.CreateUserDTO;
+import br.com.manager.dto.UserUpdateDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.Id;
@@ -47,5 +48,24 @@ public class Users {
         this.phone = createUserDTO.getPhone();
         this.active = true;
         this.address = new Address(createUserDTO.getAddress());
+    }
+
+    public void update(UserUpdateDTO userUpdateDTO) {
+        if(userUpdateDTO.getName() != null) {
+            this.name = userUpdateDTO.getName();
+        }
+        if (userUpdateDTO.getEmail() != null) {
+            this.email = userUpdateDTO.getEmail();
+        }
+        if (userUpdateDTO.getPhone() != null) {
+            this.phone = userUpdateDTO.getPhone();
+        }
+        if (userUpdateDTO.getAddressDTO() != null) {
+            this.address.update(userUpdateDTO.getAddressDTO());
+        }
+    }
+
+    public void delete() {
+        this.active = false;
     }
 }
