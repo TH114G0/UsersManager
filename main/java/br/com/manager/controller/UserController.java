@@ -3,6 +3,7 @@ package br.com.manager.controller;
 import br.com.manager.dto.CreateUserDTO;
 import br.com.manager.dto.UserListDTO;
 import br.com.manager.dto.UserResponseDTO;
+import br.com.manager.dto.UserUpdateDTO;
 import br.com.manager.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +31,17 @@ public class UserController {
     public ResponseEntity<Page<UserListDTO>> list(@PageableDefault(size = 10, sort = {"name"}) Pageable pageable) {
         var page = userService.list(pageable);
         return ResponseEntity.ok(page);
+    }
+
+    @PutMapping
+    public ResponseEntity<UserResponseDTO> update(@RequestBody UserUpdateDTO userUpdateDTO) {
+        var user = userService.update(userUpdateDTO);
+        return ResponseEntity.ok().body(user);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> delete(@PathVariable Long id) {
+        userService.delete(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
